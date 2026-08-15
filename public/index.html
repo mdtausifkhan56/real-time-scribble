@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Scribble & Guess - Multiplayer</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Animated Background Graphics -->
+  <div class="bg-animation">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+  </div>
+
+  <!-- Lobby Screen -->
+  <div id="lobby" class="lobby-container">
+    <div class="glass-card">
+      <h1>🎨 Scribble Clash</h1>
+      <p>Real-Time Multiplayer Drawing & Guessing Game</p>
+      <input type="text" id="username-input" placeholder="Enter your nickname..." maxlength="15">
+      <input type="text" id="room-input" placeholder="Enter Room Code..." maxlength="10">
+      <button id="join-btn">Join Room</button>
+    </div>
+  </div>
+
+  <!-- Game Screen -->
+  <div id="game-container" class="game-container hidden">
+    <!-- Sidebar -->
+    <div class="sidebar glass-panel">
+      <h3>Players & Scores</h3>
+      <ul id="player-list"></ul>
+      <div class="room-info">
+        <p>Room: <span id="display-room"></span></p>
+        <p>Timer: <span id="timer">60</span>s</p>
+      </div>
+    </div>
+
+    <!-- Main Drawing Board -->
+    <div class="main-board glass-panel">
+      <div class="game-header">
+        <h2 id="word-display">Waiting for players...</h2>
+      </div>
+      <div class="canvas-wrapper">
+        <canvas id="paintCanvas" width="800" height="600"></canvas>
+      </div>
+      <div id="toolbar" class="toolbar">
+        <div class="colors">
+          <div class="color active" style="background: #000000;" data-color="#000000"></div>
+          <div class="color" style="background: #e74c3c;" data-color="#e74c3c"></div>
+          <div class="color" style="background: #2ecc71;" data-color="#2ecc71"></div>
+          <div class="color" style="background: #3498db;" data-color="#3498db"></div>
+          <div class="color" style="background: #f1c40f;" data-color="#f1c40f"></div>
+          <div class="color" style="background: #9b59b6;" data-color="#9b59b6"></div>
+          <input type="color" id="custom-color-picker" value="#000000">
+        </div>
+        <div class="brush-sizes">
+          <button class="brush-size active" data-size="4">Small</button>
+          <button class="brush-size" data-size="10">Medium</button>
+          <button class="brush-size" data-size="20">Large</button>
+        </div>
+        <button id="clear-btn" class="danger-btn">Clear Canvas</button>
+      </div>
+    </div>
+
+    <!-- Chat Box -->
+    <div class="chat-panel glass-panel">
+      <h3>Live Chat & Guesses</h3>
+      <div id="chat-messages" class="chat-messages"></div>
+      <div class="chat-input-area">
+        <input type="text" id="chat-input" placeholder="Type your guess here...">
+        <button id="send-btn">Send</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="client.js"></script>
+</body>
+</html>
